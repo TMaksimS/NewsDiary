@@ -1,12 +1,15 @@
 from typing import Union
+
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import update, and_
+
+from src.user.schemas import UserGet, UserCreate
 from src.user.models import User
 from src.security import Hasher
-from sqlalchemy import update, and_
-from src.user.schemas import UserGet, UserCreate
 
 
 class UserDB:
+    """The DataBase logic, creating for Business logic"""
     def __init__(self, session: AsyncSession):
         self.session = session
 
@@ -32,8 +35,10 @@ class UserDB:
 
 
 class UserBL:
+    """The business logic for routers, uses functions from UserDB"""
+
     @staticmethod
-    async def _create_user(body: UserCreate, session: AsyncSession) -> UserGet:
+    async def create_user(body: UserCreate, session: AsyncSession) -> UserGet:
         async with session.begin():
             userdb = UserDB(session=session)
             user = await userdb.create_user(email=body.email,
@@ -45,8 +50,8 @@ class UserBL:
                 email=user.email,
                 is_active=user.is_active,
                 is_admin=user.is_admin,
-                )
+            )
 
     @staticmethod
-    async def _delete_user():
+    async def delete_user():
         pass

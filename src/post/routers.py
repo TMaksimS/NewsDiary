@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
-from src.post.schemas import PostGet, PostCreate
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.database import get_db
-from src.post.crud import PostBL
 from sqlalchemy.exc import IntegrityError
 from logging import getLogger
+
+from src.post.schemas import PostGet, PostCreate
+from src.database import get_db
+from src.post.crud import PostBL
 
 logger = getLogger(__name__)
 
