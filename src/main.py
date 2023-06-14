@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+
 from src.user.routers import app as user_router
 from src.post.routers import app as post_router
+from src.authorization.routers import app as auth_router
 
 app = FastAPI()
 
@@ -11,10 +13,5 @@ async def root():
 
 
 app.include_router(user_router, prefix='/user', tags=['user'])
-app.include_router(post_router, prefix='/post', tags=['post'])
-#
-# {
-#   "email": "test1@g.com",
-#   "username": "test1",
-#   "password": "123"
-# }
+app.include_router(post_router, prefix='/tasks', tags=['post'])
+app.include_router(auth_router, prefix='/auth', tags=['auth'])

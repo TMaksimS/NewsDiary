@@ -1,4 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from src.post.models import Post
 from src.post.schemas import PostGet, PostCreate
 
@@ -16,7 +17,8 @@ class PostDB:
 
 class PostBL:
     @staticmethod
-    async def _create_post(body: PostCreate, session: AsyncSession) -> PostGet:
+    async def _create_post(body: PostCreate,
+                           session: AsyncSession) -> PostGet:
         async with session.begin():
             postdb = PostDB(session=session)
             post = await postdb.create_post(title=body.title, text=body.text,
