@@ -62,4 +62,3 @@ async def create_user(body: UserCreate,
     except IntegrityError as err:
         logger.error(err)
         raise HTTPException(status_code=503, detail=f"Database error: {err}")
-
