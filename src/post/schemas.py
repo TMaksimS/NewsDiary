@@ -13,6 +13,7 @@ class PostCreate(Post):
 class PostGet(Post):
     id: int
     author_id: int
+    can_edit: bool
 
     class Config:
         orm_mode = True
